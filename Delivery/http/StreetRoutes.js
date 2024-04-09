@@ -1,4 +1,3 @@
-// Delivery/http/StreetRoutes.js
 const express = require('express');
 const router = express.Router();
 const Street = require('../../UseCases/UseCases');
