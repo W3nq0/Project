@@ -1,10 +1,10 @@
 const xlsx = require('xlsx');
 const fs = require('fs');
-const path = require('path'); // Импортируем модуль path для работы с путями
-const { promisify } = require('util'); // Импорт функции promisify из модуля util
+const path = require('path'); 
+const { promisify } = require('util');
 const repository = require('../../Repository/index.js');
 
-const writeFileAsync = promisify(fs.writeFile); // Преобразование функции writeFile в асинхронный стиль
+const writeFileAsync = promisify(fs.writeFile); 
 
 class FileManager {
     static async getDiff() {
@@ -38,7 +38,7 @@ class FileManager {
                 return 'Изменений нет';
             }
     
-            const resultDir = path.resolve(__dirname, '../../Result'); // Путь к папке Result
+            const resultDir = path.resolve(__dirname, '../../Result'); 
             const mergedDataPath = path.join(resultDir, 'mergedData.json');
             const differencePath = path.join(resultDir, 'difference.json');
     
