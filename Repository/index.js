@@ -1,5 +1,3 @@
-// index.js
-
 const GetNca = require('./GetNca');
 const WorkFiles = require('./WorkFiles');
 
