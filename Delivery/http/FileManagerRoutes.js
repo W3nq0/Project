@@ -1,4 +1,3 @@
-// Delivery/http/FileManagerRoutes.js
 const archiver = require('archiver');
 const express = require('express');
 const router = express.Router();
