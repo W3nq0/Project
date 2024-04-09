@@ -8,8 +8,8 @@ const writeFileAsync = promisify(fs.writeFile);
 class GeneratorExcel {
     static async generate() {
         try {
-            const resultDir = path.resolve(__dirname, '../../Result'); // Путь к папке Result
-            const dataDir = path.resolve(__dirname, '../../Data'); // Путь к папке Data
+            const resultDir = path.resolve(__dirname, '../../Result'); 
+            const dataDir = path.resolve(__dirname, '../../Data'); 
 
             const mergedData = require(path.join(resultDir, 'mergedData.json'));
             const differences = require(path.join(resultDir, 'difference.json'));
