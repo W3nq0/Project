@@ -1,7 +1,7 @@
 const fs = require('fs');
 const xlsx = require('xlsx');
 const path = require('path');
-const GetNca = require('./GetNca');
+const GetNca = require('./Nca');
 
 
 class WorkFiles {
@@ -14,13 +14,12 @@ class WorkFiles {
             const workbook = xlsx.readFile(filePath);
             const sheetName = workbook.SheetNames[0];
             const sheet = workbook.Sheets[sheetName];
-            const data = xlsx.utils.sheet_to_json(sheet, { header: ["id", "name", "region", "district", "city"], range:1 });
+            const data = xlsx.utils.sheet_to_json(sheet, { header: ["id", "name", "region", "district", "city"], range: 1 });
             return data;
         } catch (error) {
             throw new Error('Ошибка при чтении Excel файла');
         }
     }
-
     static async getLinksForRequest() {
         try {
             const jsonDataPath = path.resolve(__dirname, '../Data/jest2.json');
