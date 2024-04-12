@@ -1,19 +1,19 @@
 const express = require('express');
-const path = require('path');
 const router = express.Router();
-const AddressService = require('../../UseCases/UseCases');
+const UseCases = require('../../UseCases/UseCases.js');
+const path = require('path');
 
-const filePath = path.join(__dirname, '../../Data/AddressesStreet.json');
-const addressService = new AddressService(filePath);
-
-router.get('/api/cacheSetter', async (req, res) => {
+router.get('/setCache', async (req, res) => {
     try {
-        let totalSuccessfulAddresses = 0;
-        for (let street of addressService.streets) {
-            totalSuccessfulAddresses += await addressService.checkAddressesForStreet(street);
+        const filePath = path.join(__dirname, '../../Data/AD.json'); 
+        const useCases = new UseCases(filePath); 
+        const streetsData = await useCases.readStreetsFromJSON();
+        let totalSuccessfulRequests = 0;
+        for (let street of streetsData) {
+            const successfulRequestsCount = await useCases.checkAddressesForStreet(street);
+            totalSuccessfulRequests += successfulRequestsCount;
         }
-
-        res.json({ totalSuccessfulAddresses });
+        res.json({ totalSuccessfulRequests });
     } catch (error) {
         res.status(500).json({ error: "Ошибка при получении адресов" });
     }
