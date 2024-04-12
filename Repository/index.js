@@ -1,5 +1,7 @@
-const GetNca = require('./GetNca');
-const WorkFiles = require('./WorkFiles');
+const GetNca = require('./Nca');
+const WorkFiles = require('./FileExLink');
+const Requests = require('./Requests');
+
 
 class Repository {
     static async getNcaStreets(xmlLink, region, district, city) {
@@ -12,6 +14,9 @@ class Repository {
 
     static async getLinksForRequest() {
         return await WorkFiles.getLinksForRequest();
+    }
+    async sendAddressRequest() {
+        return await Requests.sendAddressRequest();
     }
 }
 
