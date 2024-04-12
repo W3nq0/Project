@@ -2,23 +2,21 @@
 const FileManagerGetDiff = require('./FileManager/getDiff');
 const FileManagerGetStreet = require('./FileManager/getStreet');
 const GeneratorExcel = require('./StreetService/GeneratorExcel');
-const AddressService = require('./StreetsManager/getApi');
+const AddressCache = require('./StreetsManager/AddressesCache.js');
+const FileReader = require('./StreetsManager/fileReader.js');
 
 class UseCases {
-    constructor() {
+    constructor(filePath) {
         this.fileManagerDiff = new FileManagerGetDiff();
         this.fileManagerStreet = new FileManagerGetStreet();
         this.generatorExcel = new GeneratorExcel();
-        this.checkAddressesForStreet = new AddressService();
-        this.maxHouseNumber = 1000;
-        this.maxCorpusNumber = 2000;
-        this.streets = [];
+        this.cacheAddresses = new AddressCache();
+        this.checkAddress = new FileReader(filePath);
     }
 
     async getStreets() {
         return await FileManagerGetStreet.getStreets();
     }
-
     async getDiff() {
         return await FileManagerGetDiff.getDiff();
     }
@@ -26,8 +24,12 @@ class UseCases {
     async generateExcel() {
         return await GeneratorExcel.generate();
     }
-    async checkAddressesForStreet() {
-        return await AddressService.checkAddressesForStreet()
+    async readStreetsFromJSON() {
+        return await this.checkAddress.readStreetsFromJSON(); 
+    }
+
+    async checkAddressesForStreet(streetName) {
+        return await this.cacheAddresses.checkAddressesForStreet(streetName); 
     }
 }
 
