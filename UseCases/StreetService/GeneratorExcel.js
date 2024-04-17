@@ -1,24 +1,22 @@
 const xlsx = require('xlsx');
-const fs = require('fs');
 const path = require('path');
-const repository = require('../../Repository');
-const { promisify } = require('util');
-const writeFileAsync = promisify(fs.writeFile);
 
 class GeneratorExcel {
     static async generate() {
         try {
-            const resultDir = path.resolve(__dirname, '../../Result');
+            const resultDif = path.resolve(__dirname, '../../Repository/bd/DifferenceData'); 
+            const resultMer = path.resolve(__dirname, '../../Repository/bd/MergedData'); 
+            const resultAdr = path.resolve(__dirname, '../../Repository/bd/AdressesData'); 
             const dataDir = path.resolve(__dirname, '../../Data');
 
-            const mergedData = require(path.join(resultDir, 'mergedData.json'));
-            const differences = require(path.join(resultDir, 'difference.json'));
+            const mergedData = require(path.join(resultMer, 'mergedData.json'));
+            const differences = require(path.join(resultDif, 'difference.json'));
             
             const mergedWorkbook = xlsx.utils.book_new();
             const mergedWorksheet = xlsx.utils.json_to_sheet(mergedData);
             xlsx.utils.book_append_sheet(mergedWorkbook, mergedWorksheet, "Merged Data");
             
-            const mergedFileName = path.join(resultDir, 'AdressesExcel.xlsx');
+            const mergedFileName = path.join(resultAdr, 'AdressesExcel.xlsx');
             xlsx.writeFile(mergedWorkbook, mergedFileName);
     
             console.log(`Файл Excel с объединенными данными успешно создан: ${mergedFileName}`);
@@ -32,7 +30,7 @@ class GeneratorExcel {
             const differenceWorksheet = xlsx.utils.json_to_sheet(differences);
             xlsx.utils.book_append_sheet(differenceWorkbook, differenceWorksheet, "Difference Data");
     
-            const diffFileName = path.join(resultDir, 'difference.xlsx');
+            const diffFileName = path.join(resultDif, 'difference.xlsx');
             xlsx.writeFile(differenceWorkbook, diffFileName);
     
             console.log(`Файл Excel с разницей данных успешно создан: ${diffFileName}`);
