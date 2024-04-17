@@ -8,7 +8,7 @@ module.exports = (useCases) => {
             const { mergedFileName, diffFileName } = await useCases.generateExcel();
 
             const archive = archiver('zip', {
-                zlib: { level: 9 } 
+                zlib: { level: 9 }
             });
 
             res.attachment('excel_files.zip');
