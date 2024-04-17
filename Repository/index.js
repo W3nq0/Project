@@ -1,6 +1,6 @@
-const GetNca = require('./Nca');
-const WorkFiles = require('./FileExLink');
-const Requests = require('./Requests');
+const GetNca = require('./NcaAPI');
+const WorkFiles = require('./DataHandler');
+const Requests = require('./AddressAPI');
 
 
 class Repository {
