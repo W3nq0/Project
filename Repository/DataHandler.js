@@ -1,7 +1,7 @@
 const fs = require('fs');
 const xlsx = require('xlsx');
 const path = require('path');
-const GetNca = require('./Nca');
+const GetNca = require('./NcaAPI');
 
 
 class WorkFiles {
@@ -22,7 +22,7 @@ class WorkFiles {
     }
     static async getLinksForRequest() {
         try {
-            const jsonDataPath = path.resolve(__dirname, '../Data/jest2.json');
+            const jsonDataPath = path.resolve(__dirname, './bd/AdressesRequest/jest2.json');
             const jsonData = fs.readFileSync(jsonDataPath, 'utf8');
             const data = JSON.parse(jsonData);
             let allStreets = [];
