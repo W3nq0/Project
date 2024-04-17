@@ -1,8 +1,8 @@
-const FileManagerGetDiff = require('./FileManager/getDiff');
-const FileManagerGetStreet = require('./FileManager/getStreet');
+const FileManagerGetDiff = require('./StreetData/DataComparison.js');
+const FileManagerGetStreet = require('./StreetData/StreetDataFetcher.js');
 const GeneratorExcel = require('./StreetService/GeneratorExcel');
-const AddressCache = require('./StreetsManager/AddressesCache.js');
-const FileReader = require('./StreetsManager/fileReader.js');
+const AddressCache = require('./CacheService/AddressesCache.js');
+const FileReader = require('./CacheService/fileReader.js');
 
 class UseCases {
     constructor(filePath) {
