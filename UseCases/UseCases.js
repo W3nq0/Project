@@ -3,6 +3,7 @@ const FileManagerGetStreet = require('./StreetData/StreetDataFetcher.js');
 const GeneratorExcel = require('./StreetService/GeneratorExcel');
 const AddressCache = require('./CacheService/AddressesCache.js');
 const FileReader = require('./CacheService/fileReader.js');
+const Variations = require('./CityUntilites/сityVariations.js')
 
 class UseCases {
     constructor(filePath) {
@@ -11,6 +12,7 @@ class UseCases {
         this.fileManagerStreet = new FileManagerGetStreet();
         this.generatorExcel = new GeneratorExcel();
         this.cacheAddresses = new AddressCache();
+        this.cityVariationsLogic = new Variations();
     }
 
     async parseAndStoreData(filePath) {
@@ -43,6 +45,11 @@ class UseCases {
     async checkAddressesForStreet(streetName) {
         return await this.cacheAddresses.checkAddressesForStreet(streetName);
     }
+
+    async getCityVariations(excelFilePath) {
+        return await this.cityVariationsLogic.getCityVariations(excelFilePath);
+    }
 }
+
 
 module.exports = (filePath) => new UseCases(filePath);
