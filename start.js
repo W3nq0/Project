@@ -1,3 +1,6 @@
 const app = require('./Delivery/Index');
+const port = 3000;
 
-module.exports = app;
+app.listen(port, () => {
+    console.log(`Сервер запущен на порту ${port}`);
+});
